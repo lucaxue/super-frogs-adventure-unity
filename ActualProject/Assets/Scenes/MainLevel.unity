@@ -2202,6 +2202,7 @@ GameObject:
   - component: {fileID: 1269642574}
   - component: {fileID: 1269642575}
   - component: {fileID: 1269642576}
+  - component: {fileID: 1269642577}
   m_Layer: 0
   m_Name: SuperFrog
   m_TagString: Untagged
@@ -2333,6 +2334,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3299cd7d71e6aa4b98bf9fdd3209160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1269642577
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269642571}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7de4a3fc81d3f35499a466baf32d2ba5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1386076591
 GameObject:
   m_ObjectHideFlags: 0
