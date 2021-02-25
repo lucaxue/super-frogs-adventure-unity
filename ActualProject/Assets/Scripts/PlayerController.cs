@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,11 +9,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
 
+    private Collider2D collider;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        collider = GetComponent<Collider2D>();
     }
 
 
@@ -21,7 +25,16 @@ public class PlayerController : MonoBehaviour
     {
         Movement();
     }   
-       
+    
+
+    void OnTriggerEnter2D(Collider2D colliderTriggered)
+    {
+        if(colliderTriggered.tag == "DeathBox")
+        {
+            SceneManager.LoadScene("MainLevel");
+            print("death box yeyyyy");
+        }
+    }
 
     void Movement()
     {
@@ -71,6 +84,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isFalling", true);
 
         }
+
     }
  
 }
