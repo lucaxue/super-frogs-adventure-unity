@@ -15,7 +15,7 @@ public class CameraFollowFrog : MonoBehaviour
 
    void FixedUpdate()
    {
-     transform.position = new Vector3(SuperFrog.position.x, SuperFrog.position.y, transform.position.z);
+     transform.position = new Vector3(SuperFrog.position.x, SuperFrog.position.y + 1, transform.position.z);
    }
 
 
