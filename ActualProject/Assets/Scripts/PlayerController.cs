@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private LayerMask ground;
+    //serializing a field makes a private field accessible in the unity inspector
+    [SerializeField] private LayerMask ground; 
+    //LayerMask is the type of a layer
     [SerializeField] private float speed = 6.25f;
     [SerializeField] private float jumpForce = 12.8f;
 
@@ -41,7 +43,6 @@ public class PlayerController : MonoBehaviour
     void Movement()
     {
         var xAxis = Input.GetAxis("Horizontal");
-        var jumpAxis = Input.GetAxis("Jump");
         //left movement
         if (xAxis < 0)
         {
@@ -56,7 +57,7 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector2(1, 1);
         }
 
-        //jump
+        //jump only if key pressed and touching layer ground
         if (Input.GetButtonDown("Jump") && collider.IsTouchingLayers(ground))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
