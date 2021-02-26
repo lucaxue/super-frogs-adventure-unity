@@ -51,8 +51,13 @@ public class PlayerController : MonoBehaviour
         if (colliderTriggered.tag == "PineAppleCollected"){
             Destroy(colliderTriggered.gameObject);
         }
-          if (colliderTriggered.tag == "TrophyCollected"){
+
+        if (colliderTriggered.tag == "TrophyCollected"){
             Destroy(colliderTriggered.gameObject);
+        }
+        
+        if (colliderTriggered.tag == "Win"){
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
     }

@@ -6,6 +6,10 @@ TagManager:
   tags:
   - DeathBox
   - Enemy
+  - PineAppleCollected
+  - CherryCollected
+  - TrophyCollected
+  - Win
   layers:
   - Default
   - TransparentFX
