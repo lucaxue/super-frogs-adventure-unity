@@ -10,10 +10,11 @@ public class PlayerController : MonoBehaviour
     //LayerMask is the type of a layer
     [SerializeField] private float speed = 6.25f;
     [SerializeField] private float jumpForce = 12.8f;
+    [SerializeField] private Collider2D feetCollider;
+    [SerializeField] private Collider2D bodyCollider;
 
     private Rigidbody2D rb;
     private Animator animator;
-    [SerializeField] private Collider2D collider;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +36,12 @@ public class PlayerController : MonoBehaviour
     {
         if (colliderTriggered.tag == "DeathBox")
         {
-            SceneManager.LoadScene("MainLevel");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        if (colliderTriggered.tag == "Enemy")
+        {
+            //to add potentially: lose life
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         if (colliderTriggered.tag == "CherryCollected"){
@@ -68,7 +74,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //jump only if key pressed and touching layer ground
-        if (Input.GetButtonDown("Jump") && collider.IsTouchingLayers(ground))
+        if (Input.GetButtonDown("Jump") && feetCollider.IsTouchingLayers(ground))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             animator.SetBool("isJumping",true);
@@ -95,7 +101,7 @@ public class PlayerController : MonoBehaviour
         else if (animator.GetBool("isFalling"))
         {
             //if touching ground
-            if (collider.IsTouchingLayers(ground))
+            if (feetCollider.IsTouchingLayers(ground))
             {
                 //start idling
                 animator.SetBool("isRunning", false);
