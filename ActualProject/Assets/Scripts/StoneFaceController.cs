@@ -6,36 +6,39 @@ public class StoneFaceController : MonoBehaviour
 {
     // Start is called before the first frame update
 
+    [SerializeField] private float speed = 2f;
+    [SerializeField] private LayerMask ground;
     private Rigidbody2D rbStone;
+    private Vector2 startPos;
+    private Vector2 endPos;
+    private Vector2 nextPos;
     void Start()
     {
         rbStone = GetComponent<Rigidbody2D>();
-
+        startPos = rbStone.position;
+        endPos = new Vector2(rbStone.position.x, rbStone.position.y - 2);
+        nextPos = endPos;
     }
 
     // Update is called once per frame
     void Update()
     {
-        StartCoroutine(Movement());
+        Movement();
     }
 
-    IEnumerator Movement()
+    void Movement()
     {
-        //move with velocity
-        //if position is 3 below
-        //stop moving
-        var originalY = rbStone.position.y;
-        rbStone.velocity = new Vector2(rbStone.velocity.x, -3);
-        if (rbStone.position == new Vector2(rbStone.position.x, originalY - 1))
+        //move towards
+        rbStone.position = Vector2.MoveTowards(rbStone.position, nextPos, speed * Time.deltaTime);
+
+        if (Vector2.Distance(rbStone.position, nextPos) <= 0.1 || rbStone.IsTouchingLayers(ground))
         {
-            rbStone.velocity = new Vector2(0, 0);
+            ChangeTargetPosition();
         }
-        yield return new WaitForSeconds(2);
-        rbStone.velocity = new Vector2(rbStone.velocity.x, 3);
-        if (rbStone.position == new Vector2(rbStone.position.x, originalY + 1))
-        {
-            rbStone.velocity = new Vector2(0, 0);
-        }
-        yield return new WaitForSeconds(2);
+    }
+
+    void ChangeTargetPosition()
+    {
+        nextPos = nextPos != startPos ? startPos : endPos;
     }
 }
