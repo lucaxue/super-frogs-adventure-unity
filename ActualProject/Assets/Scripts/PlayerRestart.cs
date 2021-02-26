@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour
+public class PlayerRestart : MonoBehaviour
 {
     //serializing a field makes a private field accessible in the unity inspector
     [SerializeField] private LayerMask ground; 
@@ -36,12 +36,13 @@ public class PlayerController : MonoBehaviour
     {
         if (colliderTriggered.tag == "DeathBox")
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            LivesScript.livesValue -=1;
-            if(LivesScript.livesValue <=0)
-            {
-                SceneManager.LoadScene("MainLevel");
-            }
+        
+            LivesScript.livesValue = 5;
+             ScoreScript.scoreValue = 0;
+
+           
+           SceneManager.LoadScene("LevelUpdate");
+            
         }
         if (colliderTriggered.tag == "Enemy")
         {
