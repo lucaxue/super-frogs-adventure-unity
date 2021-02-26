@@ -2348,11 +2348,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 2.5
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: e7cb4376eddbc4632b820d25575e1ec0, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &1269642575
 BoxCollider2D:
   m_ObjectHideFlags: 0
