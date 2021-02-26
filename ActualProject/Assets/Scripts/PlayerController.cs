@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    //make rigidbody field
+    [SerializeField] private LayerMask ground;
+    [SerializeField] private float speed = 6.25f;
+    [SerializeField] private float jumpForce = 12.8f;
+
     private Rigidbody2D rb;
     private Animator animator;
-
     private Collider2D collider;
 
     // Start is called before the first frame update
@@ -40,58 +42,69 @@ public class PlayerController : MonoBehaviour
     {
         var xAxis = Input.GetAxis("Horizontal");
         var jumpAxis = Input.GetAxis("Jump");
-        //right and left movement
+        //left movement
         if (xAxis < 0)
         {
-            //change rb's velocity to a new 2d vector
-            //x: -5, y: same as it is
-            rb.velocity = new Vector2(-5, rb.velocity.y);
+            rb.velocity = new Vector2(-speed, rb.velocity.y);
             transform.localScale = new Vector2(-1, 1);
         }
 
+        //right movement
         if (xAxis > 0)
         {
-            rb.velocity = new Vector2(5, rb.velocity.y);
+            rb.velocity = new Vector2(speed, rb.velocity.y);
             transform.localScale = new Vector2(1, 1);
         }
 
-
-        if (jumpAxis > 0)
+        //jump
+        if (Input.GetButtonDown("Jump") && collider.IsTouchingLayers(ground))
         {
-            rb.velocity = new Vector2(rb.velocity.x, 5);
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            animator.SetBool("isJumping",true);
         }
+
     }
 
     void Animation()
     {
-
-        //idle
-        if (rb.velocity == new Vector2(0, 0))
+        //if jumping
+        if (animator.GetBool("isJumping"))
         {
+            //stop running
+            animator.SetBool("isRunning", false);
+            //if y velocity is negative
+            if (rb.velocity.y < 0.1f)
+            {
+                //stop jumping, start falling
+                animator.SetBool("isJumping",false);
+                animator.SetBool("isFalling", true);
+            }
+        }
+        //if falling
+        else if (animator.GetBool("isFalling"))
+        {
+            //if touching ground
+            if (collider.IsTouchingLayers(ground))
+            {
+                //start idling
+                animator.SetBool("isRunning", false);
+                animator.SetBool("isJumping", false);
+                animator.SetBool("isFalling", false);
+            }
+        }
+        //if absolute of x-velocity greater than 1
+        else if (Mathf.Abs(rb.velocity.x) > 1f)
+        {
+            //start running
+            animator.SetBool("isRunning", true);
+        }
+        //if none of above
+        else
+        {
+            //start idling
             animator.SetBool("isRunning", false);
             animator.SetBool("isJumping", false);
             animator.SetBool("isFalling", false);
-        }
-
-        //if moving to the left or right
-        if (rb.velocity.x > 0.5 || rb.velocity.x < -0.5)
-        {
-            animator.SetBool("isRunning", true);
-        }
-
-
-        //jumping
-        if (rb.velocity.y > 0.5)
-        {
-            animator.SetBool("isJumping", true);
-            animator.SetBool("isFalling", false);
-        }
-        //falling
-        if (rb.velocity.y < -0.5)
-        {
-            animator.SetBool("isJumping", false);
-            animator.SetBool("isFalling", true);
-
         }
     }
 

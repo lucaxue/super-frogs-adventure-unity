@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SuperFrog: {fileID: 1269642573}
-  cameraDistance: 40
+  cameraDistance: 45
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 691618735}
   - component: {fileID: 691618737}
   - component: {fileID: 691618738}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GroundFloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2347,11 +2347,11 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2.5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &1269642575
 BoxCollider2D:
@@ -2391,6 +2391,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3299cd7d71e6aa4b98bf9fdd3209160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ground:
+    serializedVersion: 2
+    m_Bits: 64
+  speed: 6.25
+  jumpForce: 12.8
 --- !u!95 &1269642577
 Animator:
   serializedVersion: 3
