@@ -43,8 +43,19 @@ public class PlayerController : MonoBehaviour
             //to add potentially: lose life
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-    }
 
+        if (colliderTriggered.tag == "CherryCollected"){
+            Destroy(colliderTriggered.gameObject);
+        }
+
+        if (colliderTriggered.tag == "PineAppleCollected"){
+            Destroy(colliderTriggered.gameObject);
+        }
+          if (colliderTriggered.tag == "TrophyCollected"){
+            Destroy(colliderTriggered.gameObject);
+        }
+
+    }
     void Movement()
     {
         var xAxis = Input.GetAxis("Horizontal");
